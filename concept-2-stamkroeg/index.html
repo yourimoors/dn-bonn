@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disco-Bar D'n Bonn · De stamkroeg van Reusel</title>
+<meta name="description" content="Bruin café met Bavaria op de tap, dartavond op donderdag, discotheek en een nieuwe feestzaal. Disco-Bar D'n Bonn, Wilhelminalaan 53 in Reusel.">
+<meta name="theme-color" content="#2a1810">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=DM+Sans:wght@400;500;700&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  /* =====================================================
+     CONCEPT 2 · DE BRABANTSE STAMKROEG
+     Bruin café: donker hout, crème, amber en bierkoper
+     ===================================================== */
+  :root {
+    --wood: #2a1810;
+    --wood-2: #36200f;
+    --wood-3: #4a2d18;
+    --cream: #f5e9d3;
+    --paper: #efe0c4;
+    --ink: #2a1810;
+    --amber: #e0a03c;
+    --copper: #b8642a;
+    --brick: #8c2f1b;
+    --board: #1f2e27;
+    --muted: #c9b79a;
+    --line: rgba(245,233,211,.14);
+    --radius: 18px;
+    --max: 1160px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--wood);
+    color: var(--cream);
+    font: 400 17px/1.65 "DM Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; line-height: 1.08; letter-spacing: -.01em; font-weight: 900; }
+  .chalk { font-family: "Caveat", cursive; font-weight: 700; }
+
+  .eyebrow {
+    font-family: "Caveat", cursive; font-weight: 700; font-size: 26px; color: var(--amber);
+    display: inline-block; transform: rotate(-2deg);
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 10px; font-weight: 700; font-size: 16px; text-decoration: none;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease; font-family: inherit;
+  }
+  .btn-primary { background: var(--amber); color: var(--ink); box-shadow: 0 4px 0 var(--copper); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--copper); }
+  .btn-primary:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--copper); }
+  .btn-ghost { border: 2px solid rgba(245,233,211,.4); color: var(--cream); }
+  .btn-ghost:hover { background: rgba(245,233,211,.1); border-color: var(--cream); }
+
+  /* houtnerf-achtergrond voor donkere vlakken */
+  .wood-bg {
+    background-color: var(--wood);
+    background-image:
+      repeating-linear-gradient(90deg, rgba(0,0,0,.18) 0 2px, transparent 2px 120px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.015) 0 1px, transparent 1px 7px);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    position: fixed; inset: 0 0 auto; z-index: 50;
+    transition: background .3s ease, box-shadow .3s ease;
+  }
+  .nav.scrolled { background: rgba(42,24,16,.94); backdrop-filter: blur(10px); box-shadow: 0 6px 24px rgba(0,0,0,.35); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand-mark {
+    width: 60px; height: 63.5px; flex: none; border-radius: 7px;
+    background: #fff url("https://www.dn-bonn.nl/style/top.png") -7.5px -14.5px / 480px 90px no-repeat;
+    border: 2px solid var(--amber);
+  }
+  .brand-name { font-family: "Fraunces", serif; font-weight: 900; font-size: 21px; line-height: 1.1; }
+  .brand-name small { display: block; font-family: "DM Sans"; font-weight: 500; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; font-weight: 500; font-size: 15px; color: var(--cream); padding: 9px 14px; border-radius: 8px; transition: background .2s, color .2s; }
+  .nav-links a:hover { background: rgba(245,233,211,.1); color: var(--amber); }
+  .nav-links .btn { padding: 10px 18px; font-size: 14px; color: var(--ink); }
+  .nav-links .btn:hover { color: var(--ink); background: var(--amber); }
+  .menu-toggle { display: none; background: none; border: 0; color: var(--cream); width: 44px; height: 44px; cursor: pointer; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative; min-height: 100svh; display: flex; align-items: flex-end; isolation: isolate;
+    padding: 140px 0 90px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: -2;
+    background:
+      url("https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=2000&q=70") center / cover no-repeat,
+      linear-gradient(160deg, #5a3519, #2a1810);
+  }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(ellipse at 80% 20%, rgba(224,160,60,.28), transparent 55%),
+      linear-gradient(180deg, rgba(42,24,16,.5), rgba(42,24,16,.88) 75%, var(--wood));
+  }
+  .hero h1 { font-size: clamp(44px, 8vw, 104px); max-width: 12ch; margin: 14px 0 22px; }
+  .hero h1 em { font-style: italic; font-weight: 500; color: var(--amber); }
+  .hero p.lead { font-size: clamp(18px, 2vw, 21px); color: #e9dcc2; max-width: 50ch; margin-bottom: 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+  .status {
+    display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 12px; border-radius: 8px;
+    background: rgba(245,233,211,.1); border: 1px solid var(--line); font-size: 14px; font-weight: 500;
+  }
+  .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #9a8a72; }
+  .status.open .status-dot { background: #7be08a; box-shadow: 0 0 0 0 rgba(123,224,138,.6); animation: pulse 2s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(123,224,138,0); } 100% { box-shadow: 0 0 0 0 rgba(123,224,138,0); } }
+
+  .stamp {
+    position: absolute; right: clamp(16px, 7vw, 120px); bottom: clamp(40px, 12vh, 120px);
+    width: 150px; height: 150px; border-radius: 50%; display: grid; place-items: center; text-align: center;
+    background: var(--cream); color: var(--ink); border: 4px double var(--brick);
+    transform: rotate(10deg); box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    font-family: "Fraunces", serif; font-weight: 900; line-height: 1.05; padding: 14px;
+  }
+  .stamp small { display: block; font-family: "DM Sans"; font-weight: 700; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: var(--brick); }
+  .stamp b { display: block; font-size: 34px; color: var(--brick); margin: 2px 0; }
+
+  /* ---------- Banner-strip ---------- */
+  .ribbon { background: var(--brick); color: var(--cream); padding: 16px 0; border-block: 3px double rgba(245,233,211,.35); overflow: hidden; }
+  .ribbon-track { display: flex; gap: 40px; width: max-content; animation: scroll 42s linear infinite; }
+  .ribbon span { font-family: "Fraunces", serif; font-weight: 700; font-style: italic; font-size: 21px; white-space: nowrap; display: inline-flex; align-items: center; gap: 40px; }
+  .ribbon span::after { content: "◆"; font-size: 11px; color: var(--amber); font-style: normal; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  section { padding: 110px 0; }
+  .section-head { margin-bottom: 52px; max-width: 640px; }
+  .section-head h2 { font-size: clamp(34px, 5vw, 56px); margin: 6px 0 14px; }
+  .section-head p { color: var(--muted); }
+
+  /* ---------- Historie ---------- */
+  .history { background: var(--cream); color: var(--ink); }
+  .history .eyebrow { color: var(--brick); }
+  .history .section-head p { color: #6b5238; }
+  .timeline { position: relative; display: grid; gap: 28px; padding-left: 38px; max-width: 760px; }
+  .timeline::before { content: ""; position: absolute; left: 11px; top: 8px; bottom: 8px; width: 3px; background: repeating-linear-gradient(180deg, var(--copper) 0 8px, transparent 8px 14px); }
+  .t-item { position: relative; background: #fff8ea; border: 1px solid #e3d2b0; border-radius: var(--radius); padding: 24px 28px; box-shadow: 0 8px 24px -14px rgba(74,45,24,.5); }
+  .t-item::before { content: ""; position: absolute; left: -35px; top: 30px; width: 17px; height: 17px; border-radius: 50%; background: var(--amber); border: 4px solid var(--cream); box-shadow: 0 0 0 2px var(--copper); }
+  .t-when { font-family: "Caveat", cursive; font-weight: 700; font-size: 26px; color: var(--brick); }
+  .t-item h3 { font-size: 26px; margin: 2px 0 8px; }
+  .t-item p { color: #5b4630; }
+
+  /* ---------- Dart ---------- */
+  .dart { background: var(--board); border-block: 8px solid var(--wood-3); position: relative; overflow: hidden; }
+  .dart::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(100deg, rgba(255,255,255,.015) 0 3px, transparent 3px 11px); pointer-events: none; }
+  .dart-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 56px; align-items: center; position: relative; }
+  .dart h2 { font-size: clamp(40px, 6vw, 76px); color: #f4f0e4; margin: 6px 0 16px; }
+  .dart h2 em { font-style: italic; font-weight: 500; color: var(--amber); }
+  .dart p { color: #cfdad2; max-width: 46ch; margin-bottom: 24px; }
+  .dart-list { list-style: none; display: grid; gap: 10px; }
+  .dart-list li { display: flex; gap: 14px; align-items: baseline; font-family: "Caveat", cursive; font-weight: 700; font-size: 28px; color: #f4f0e4; }
+  .dart-list li span { color: var(--amber); min-width: 130px; }
+  .board { width: min(100%, 380px); margin-inline: auto; filter: drop-shadow(0 18px 30px rgba(0,0,0,.55)); animation: spin 90s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ---------- Drankenkaart ---------- */
+  .menu-card {
+    max-width: 920px; margin: 0 auto; background: var(--cream); color: var(--ink);
+    border-radius: 6px; padding: clamp(28px, 5vw, 60px); position: relative;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,.7), 0 0 0 10px var(--wood-3) ;
+    background-image: radial-gradient(circle at 20% 10%, rgba(255,255,255,.5), transparent 50%);
+  }
+  .menu-card::before { content: ""; position: absolute; inset: 12px; border: 2px solid var(--copper); border-radius: 3px; pointer-events: none; opacity: .55; }
+  .menu-card h2 { text-align: center; font-size: clamp(32px, 4.6vw, 50px); }
+  .menu-card .sub { text-align: center; color: #6b5238; margin: 8px auto 36px; max-width: 46ch; }
+  .menu-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px 56px; position: relative; }
+  .menu-item { display: flex; align-items: baseline; gap: 10px; font-family: "Fraunces", serif; font-weight: 700; font-size: 21px; }
+  .menu-item::after { content: ""; flex: 1; order: 2; border-bottom: 2px dotted rgba(42,24,16,.35); transform: translateY(-4px); }
+  .menu-item em { order: 3; font-family: "DM Sans"; font-style: normal; font-weight: 500; font-size: 14px; color: #7a5b3a; }
+  .menu-item.star { color: var(--brick); }
+  .menu-note { text-align: center; margin-top: 30px; font-family: "Caveat", cursive; font-size: 26px; color: var(--brick); font-weight: 700; }
+
+  /* ---------- Spaces ---------- */
+  .spaces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .space { background: var(--wood-2); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; transition: transform .3s ease, box-shadow .3s ease; }
+  .space:hover { transform: translateY(-6px) rotate(-.4deg); box-shadow: 0 24px 40px -20px rgba(0,0,0,.7); }
+  .space-img { aspect-ratio: 4/3; overflow: hidden; background: linear-gradient(135deg, #5a3519, #2a1810); }
+  .space-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .space:hover .space-img img { transform: scale(1.06); }
+  .space-body { padding: 24px 26px 28px; }
+  .space h3 { font-size: 26px; margin-bottom: 8px; }
+  .space p { color: var(--muted); font-size: 16px; }
+
+  /* ---------- Feestzaal ---------- */
+  .zaal-band { background: var(--brick); border-radius: 26px; padding: clamp(32px, 5vw, 60px); display: grid; grid-template-columns: 1.3fr 1fr; gap: 36px; align-items: center; position: relative; overflow: hidden; box-shadow: 0 0 0 8px var(--wood-3), 0 30px 50px -20px rgba(0,0,0,.7); }
+  .zaal-band::after { content: ""; position: absolute; inset: 10px; border: 2px dashed rgba(245,233,211,.35); border-radius: 18px; pointer-events: none; }
+  .zaal-band h2 { font-size: clamp(32px, 4.6vw, 54px); margin: 4px 0 14px; }
+  .zaal-band .eyebrow { color: #ffd68a; }
+  .zaal-band p { color: #f3dfd6; max-width: 46ch; margin-bottom: 26px; }
+  .zaal-nums { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; position: relative; z-index: 1; }
+  .zaal-nums div { background: rgba(42,24,16,.45); border-radius: 14px; padding: 18px 16px; text-align: center; }
+  .zaal-nums b { display: block; font-family: "Fraunces", serif; font-weight: 900; font-size: 44px; color: var(--amber); line-height: 1; }
+  .zaal-nums span { font-size: 14px; color: #ead9c6; }
+  .phones { display: flex; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }
+  .zaal-band .btn-primary { background: var(--cream); color: var(--ink); box-shadow: 0 4px 0 #c9b79a; }
+
+  /* ---------- Openingstijden (krijtbord) ---------- */
+  .board-sec { background: var(--wood-2); }
+  .chalkboard {
+    background: var(--board); border: 12px solid #6b4426; border-radius: 10px; padding: clamp(22px, 4vw, 44px);
+    box-shadow: inset 0 0 60px rgba(0,0,0,.5), 0 24px 50px -20px rgba(0,0,0,.8);
+    background-image: radial-gradient(circle at 30% 20%, rgba(255,255,255,.05), transparent 60%);
+  }
+  .chalkboard h2 { font-family: "Caveat", cursive; font-weight: 700; text-align: center; font-size: clamp(40px, 6vw, 68px); color: #f4f0e4; margin-bottom: 26px; letter-spacing: 0; }
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+  .day { border: 2px dashed rgba(244,240,228,.35); border-radius: 12px; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; min-height: 160px; position: relative; text-align: center; }
+  .day-name { font-family: "Caveat", cursive; font-weight: 700; font-size: 28px; color: #f4f0e4; }
+  .day-time { font-family: "Caveat", cursive; font-weight: 600; font-size: 22px; color: #cfdad2; }
+  .day-extra { margin-top: auto; font-family: "Caveat", cursive; font-weight: 700; font-size: 21px; line-height: 1.1; color: var(--amber); }
+  .day.closed { opacity: .45; }
+  .day.today { border-style: solid; border-color: var(--amber); box-shadow: 0 0 24px -4px rgba(224,160,60,.5); }
+  .day.today::before { content: "Vandaag"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--amber); color: var(--ink); font: 700 11px "DM Sans"; letter-spacing: .1em; text-transform: uppercase; padding: 3px 10px; border-radius: 4px; }
+  .board-note { text-align: center; margin-top: 22px; font-family: "Caveat", cursive; font-size: 24px; color: #cfdad2; }
+
+  /* ---------- Foto's ---------- */
+  .albums { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .album { position: relative; display: block; text-decoration: none; background: #fff8ea; padding: 12px 12px 0; border-radius: 4px; color: var(--ink); box-shadow: 0 16px 30px -14px rgba(0,0,0,.7); transition: transform .3s ease; }
+  .album:nth-child(1) { transform: rotate(-1.2deg); }
+  .album:nth-child(2) { transform: rotate(1deg); }
+  .album:hover { transform: rotate(0) translateY(-6px); }
+  .album img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: linear-gradient(135deg, #5a3519, #2a1810); }
+  .album-label { padding: 16px 6px 18px; display: flex; justify-content: space-between; align-items: center; gap: 14px; }
+  .album-label h3 { font-size: 22px; }
+  .album-label small { display: block; font-family: "Caveat", cursive; font-weight: 700; font-size: 22px; color: var(--brick); }
+
+  /* ---------- Contact ---------- */
+  .contact { display: grid; grid-template-columns: 1fr 1.15fr; gap: 24px; }
+  .contact-card { background: var(--wood-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 36px; }
+  .contact-list { list-style: none; display: grid; gap: 18px; margin-bottom: 30px; }
+  .contact-list li { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-list .ic { width: 42px; height: 42px; border-radius: 10px; flex: none; background: rgba(224,160,60,.16); color: var(--amber); display: grid; place-items: center; }
+  .contact-list small { display: block; color: var(--muted); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
+  .contact-list a { text-decoration: none; }
+  .contact-list a:hover { color: var(--amber); }
+  form { display: grid; gap: 14px; }
+  .field { display: grid; gap: 6px; }
+  .field label { font-size: 13px; font-weight: 700; color: var(--muted); }
+  .field input, .field textarea { width: 100%; font: inherit; color: var(--cream); background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; transition: border-color .2s, background .2s; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--amber); background: rgba(0,0,0,.4); }
+  .field textarea { min-height: 120px; resize: vertical; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  form .btn { justify-self: start; border: 0; cursor: pointer; margin-top: 6px; }
+  .map { border-radius: var(--radius); overflow: hidden; border: 4px solid var(--wood-3); min-height: 420px; }
+  .map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; filter: sepia(.55) saturate(.9) brightness(.92) contrast(1.05); }
+
+  footer { border-top: 6px double var(--wood-3); padding: 44px 0 40px; color: var(--muted); font-size: 15px; background: #20120b; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  footer a { text-decoration: none; }
+  footer a:hover { color: var(--amber); }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1020px) {
+    .week { grid-template-columns: repeat(4, 1fr); }
+    .zaal-band, .dart-grid { grid-template-columns: 1fr; }
+    .stamp { display: none; }
+  }
+  @media (max-width: 860px) {
+    .spaces, .albums, .contact { grid-template-columns: 1fr; }
+    .menu-cols { grid-template-columns: 1fr; }
+    .menu-toggle { display: grid; place-items: center; }
+    .nav-links {
+      position: fixed; inset: 76px 0 auto; flex-direction: column; align-items: stretch;
+      background: rgba(42,24,16,.98); padding: 16px 20px 24px; border-bottom: 3px double var(--wood-3);
+      transform: translateY(calc(-100% - 90px)); visibility: hidden; transition: transform .35s ease, visibility 0s .35s; z-index: -1;
+    }
+    .nav.open .nav-links { transform: none; visibility: visible; transition: transform .35s ease; }
+    .nav.open { background: rgba(42,24,16,.98); }
+    .nav-links a { font-size: 18px; padding: 14px 16px; }
+    .nav-links .btn { justify-content: center; margin-top: 8px; }
+    section { padding: 80px 0; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    .week { grid-template-columns: 1fr 1fr; }
+    .day { min-height: 130px; }
+    .row-2 { grid-template-columns: 1fr; }
+    .contact-card { padding: 26px 22px; }
+    .brand-name small { display: none; }
+    .hero { padding-bottom: 60px; }
+    .dart-list li { font-size: 24px; flex-direction: column; gap: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body class="wood-bg">
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="D'n Bonn, naar boven">
+      <span class="brand-mark" role="img" aria-label="Logo Disco-Bar d'n bonn"></span>
+      <span class="brand-name">D'n Bonn<small>Café · Disco · Zaal</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu openen" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#historie">Ons verhaal</a></li>
+      <li><a href="#darten">Darten</a></li>
+      <li><a href="#drinken">Drinken</a></li>
+      <li><a href="#tijden">Openingstijden</a></li>
+      <li><a href="#contact" class="btn btn-primary">Kom langs</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="hero-bg" role="img" aria-label="Sfeervolle bar met warme verlichting"></div>
+    <div class="stamp" aria-hidden="true"><div><small>Sinds</small><b>2012</b><small>onder één vlag</small></div></div>
+    <div class="wrap">
+      <div class="status" data-status><span class="status-dot"></span><span data-status-text>Openingstijden laden…</span></div>
+      <h1>De stamkroeg van <em>Reusel.</em></h1>
+      <p class="lead">Een koud Bavaria van de tap, donderdag dartavond en 's avonds door naar de dansvloer. Nu ook met een gloednieuwe feestzaal voor 120 gasten.</p>
+      <div class="hero-actions">
+        <a href="#tijden" class="btn btn-primary">Wanneer zijn we open?</a>
+        <a href="#feest" class="btn btn-ghost">Feest in de zaal</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true">
+    <div class="ribbon-track">
+      <span>Bavaria op de tap</span><span>Dartavond op donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
+      <span>Bavaria op de tap</span><span>Dartavond op donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
+    </div>
+  </div>
+
+  <section id="historie" class="history">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Ons verhaal</span>
+        <h2>Een kroeg met een verleden.</h2>
+        <p>Wat begon als Red Coral Bar is uitgegroeid tot het adres waar half Reusel kind aan huis is.</p>
+      </div>
+      <div class="timeline">
+        <div class="t-item reveal">
+          <span class="t-when">Vroeger</span>
+          <h3>Red Coral Bar</h3>
+          <p>Aan de Wilhelminalaan 53 in Reusel begon het als Red Coral Bar.</p>
+        </div>
+        <div class="t-item reveal">
+          <span class="t-when">2012</span>
+          <h3>John Peters neemt het over</h3>
+          <p>In 2012 nam John Peters de zaak over. Sindsdien heet het Disco-Bar D'n Bonn, met een bruin café, een discotheek en een terras onder één dak.</p>
+        </div>
+        <div class="t-item reveal">
+          <span class="t-when">Nu</span>
+          <h3>Kroeg, disco én feestzaal</h3>
+          <p>Nieuw erbij: onze feestzaal voor 120 gasten. Zo kun je bij ons terecht van het eerste biertje tot het laatste nummer, en nu ook voor je eigen feest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="darten" class="dart">
+    <div class="wrap dart-grid">
+      <div class="reveal">
+        <span class="eyebrow">Elke week</span>
+        <h2>Donderdag is <em>dartavond.</em></h2>
+        <p>Pijlen in de hand, Bavaria op de tafel en een volle kroeg die meeschreeuwt bij elke 180. Kom meedoen of gewoon kijken, iedereen is welkom.</p>
+        <ul class="dart-list">
+          <li><span>Woensdag</span> gratis darten</li>
+          <li><span>Donderdag</span> competitie en dartavond</li>
+        </ul>
+      </div>
+      <div class="reveal" aria-hidden="true">
+        <svg class="board" viewBox="-100 -100 200 200">
+          <circle r="98" fill="#1b1b1b"/>
+          <g>
+            <circle r="86" fill="#f2e6c9"/>
+            <g fill="#1b1b1b">
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(18)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(54)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(90)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(126)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(162)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(198)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(234)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(270)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(306)"/>
+              <path d="M0 0 L-14.5 -86 A87 87 0 0 1 14.5 -86Z" transform="rotate(342)"/>
+            </g>
+            <g fill="none" stroke-width="6">
+              <circle r="82" stroke="#8c2f1b" stroke-dasharray="14.3 14.3"/>
+              <circle r="52" stroke="#8c2f1b" stroke-dasharray="14.3 14.3" stroke-dashoffset="-0"/>
+            </g>
+            <circle r="86" fill="none" stroke="#2a1810" stroke-width="1.5"/>
+            <circle r="14" fill="#3d7a4a"/>
+            <circle r="6" fill="#8c2f1b"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="drinken">
+    <div class="wrap">
+      <div class="menu-card reveal">
+        <h2>Van de tap tot de shot</h2>
+        <p class="sub">Een ruim assortiment voor elke stemming. Bij ons begint het met een goed getapt biertje.</p>
+        <div class="menu-cols">
+          <div class="menu-item star">Bavaria <em>vers van de tap</em></div>
+          <div class="menu-item">Bier <em>op fles</em></div>
+          <div class="menu-item">Wijn <em>wit, rosé, rood</em></div>
+          <div class="menu-item">Frisdrank <em>& fris</em></div>
+          <div class="menu-item">Shots <em>voor de groep</em></div>
+          <div class="menu-item">Cocktails <em>van de bar</em></div>
+        </div>
+        <p class="menu-note">Vraag de man achter de tap naar de mogelijkheden.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="zaak" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">De zaak</span>
+        <h2>Drie plekken, één gezelligheid.</h2>
+        <p>Buiten in de zon, binnen aan de tap of op de dansvloer. Kies je plek.</p>
+      </div>
+      <div class="spaces">
+        <article class="space reveal">
+          <div class="space-img"><img src="https://www.dn-bonn.nl/images/terras2.jpg" alt="Het terras van D'n Bonn" loading="lazy"></div>
+          <div class="space-body"><h3>Terras</h3><p>Heerlijk uitrusten na een fietstocht door de Kempen, of gezellig afspreken met vrienden. Geniet van de Brabantse gezelligheid met een drankje en een hapje.</p></div>
+        </article>
+        <article class="space reveal">
+          <div class="space-img"><img src="https://www.dn-bonn.nl/images/bonneke.jpg" alt="Het bruine café 't Bonneke" loading="lazy"></div>
+          <div class="space-body"><h3>'t Bonneke</h3><p>Altijd welkom voor een goed gesprek. Met D'n Bonn achter de tap en goede muziek op de achtergrond voel je je hier al snel thuis.</p></div>
+        </article>
+        <article class="space reveal">
+          <div class="space-img"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De discotheek van D'n Bonn" loading="lazy"></div>
+          <div class="space-body"><h3>Discotheek</h3><p>Voor jong tot oud, single of getrouwd. De deejay draait allround: hits van nu en van vroeger. Heb je een verzoekje? Zeg het maar.</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="feest" style="padding-top:0">
+    <div class="wrap">
+      <div class="zaal-band reveal">
+        <div style="position:relative;z-index:1">
+          <span class="eyebrow">Nieuw bij ons</span>
+          <h2>Vier je feest in onze nieuwe zaal.</h2>
+          <p>Verjaardag, jubileum of familiefeest: onze nieuwe feestzaal biedt plek aan 120 gasten. Kies uit twee arrangementen of bel ons even voor de mogelijkheden.</p>
+          <div class="phones">
+            <a class="btn btn-primary" href="tel:+31618941094">06 18 94 10 94</a>
+            <a class="btn btn-ghost" href="tel:+31638063047">06 38 06 30 47</a>
+            <a class="btn btn-ghost" href="mailto:info@dn-bonn.nl?subject=Feestzaal%20bij%20D'n%20Bonn">Mail ons</a>
+          </div>
+        </div>
+        <div class="zaal-nums">
+          <div><b>120</b><span>gasten</span></div>
+          <div><b>2</b><span>arrangementen</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tijden" class="board-sec">
+    <div class="wrap">
+      <div class="chalkboard reveal">
+        <h2>Deze week bij D'n Bonn</h2>
+        <div class="week" id="week"></div>
+        <p class="board-note">Maandag is onze rustdag. Dan staat de tap even stil.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="fotos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Uit het fotoalbum</span>
+        <h2>Zoek jezelf maar terug.</h2>
+        <p>Bekijk de albums op onze Facebook-pagina.</p>
+      </div>
+      <div class="albums">
+        <a class="album reveal" href="https://www.facebook.com/pg/dn.bonn/photos/?tab=album&amp;album_id=500600030029171" target="_blank" rel="noopener">
+          <img src="https://www.dn-bonn.nl/images/1185493_500599166695924_1723571368_n.jpg" alt="Stappen bij D'n Bonn" loading="lazy">
+          <div class="album-label"><h3>Stappen @ D'n Bonn<small>Album op Facebook →</small></h3></div>
+        </a>
+        <a class="album reveal" href="https://www.facebook.com/pg/dn.bonn/photos/?tab=album&amp;album_id=548702215218952" target="_blank" rel="noopener">
+          <img src="https://www.dn-bonn.nl/images/11000654_798502503572254_7008382119285902711_o.jpg" alt="Vrijdagavond event bij D'n Bonn" loading="lazy">
+          <div class="album-label"><h3>Vrijdagavond Events<small>Album op Facebook →</small></h3></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Kom langs</span>
+        <h2>De deur staat open.</h2>
+        <p>Vraag, reservering of feestje? Loop binnen of stuur ons een bericht.</p>
+      </div>
+      <div class="contact">
+        <div class="contact-card reveal">
+          <ul class="contact-list">
+            <li>
+              <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <div><small>Adres</small><a href="https://maps.google.com/?q=Wilhelminalaan+53,+5541CT+Reusel" target="_blank" rel="noopener">Wilhelminalaan 53<br>5541 CT Reusel</a></div>
+            </li>
+            <li>
+              <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
+              <div><small>Telefoon</small><a href="tel:+31497641414">0497 64 14 14</a></div>
+            </li>
+            <li>
+              <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>
+              <div><small>E-mail</small><a href="mailto:info@dn-bonn.nl">info@dn-bonn.nl</a></div>
+            </li>
+          </ul>
+          <form data-mailto data-subject="Bericht via de website">
+            <div class="row-2">
+              <div class="field"><label for="f-name">Naam *</label><input id="f-name" name="name" required autocomplete="name"></div>
+              <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+            </div>
+            <div class="field"><label for="f-subject">Onderwerp</label><input id="f-subject" name="subject"></div>
+            <div class="field"><label for="f-msg">Bericht *</label><textarea id="f-msg" name="message" required></textarea></div>
+            <button class="btn btn-primary" type="submit">Verstuur bericht</button>
+          </form>
+        </div>
+        <div class="map reveal">
+          <iframe title="Kaart: Wilhelminalaan 53, Reusel" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://maps.google.com/maps?q=Wilhelminalaan%2053%2C%205541CT%20Reusel&amp;z=15&amp;output=embed"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Disco-Bar D'n Bonn · Wilhelminalaan 53, Reusel</span>
+    <nav>
+      <a href="#historie">Ons verhaal</a>
+      <a href="#darten">Darten</a>
+      <a href="#feest">Feestzaal</a>
+      <a href="https://www.facebook.com/dn.bonn" target="_blank" rel="noopener">Facebook</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../assets/app.js"></script>
+<script src="../assets/back.js"></script>
+</body>
+</html>
