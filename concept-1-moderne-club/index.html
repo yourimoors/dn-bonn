@@ -214,7 +214,7 @@
 
   /* ---------- Agenda / hours ---------- */
   .week-section { background: var(--bg-2); border-block: 1px solid var(--line); }
-  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 12px; }
+  .week { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 12px; }
   .day {
     background: var(--card); border: 1px solid var(--line); border-radius: 18px;
     padding: 22px 18px; display: flex; flex-direction: column; gap: 6px; min-height: 190px;
@@ -287,7 +287,7 @@
   }
   .field input:focus, .field textarea:focus { outline: none; border-color: var(--cyan); background: rgba(46,230,255,.06); box-shadow: 0 0 0 3px rgba(46,230,255,.15); }
   .field textarea { min-height: 120px; resize: vertical; }
-  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .row-2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
   form .btn { justify-self: start; border: 0; cursor: pointer; margin-top: 6px; font-family: inherit; }
   .map { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--line); min-height: 420px; }
   .map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; filter: invert(.92) hue-rotate(200deg) saturate(.8) brightness(.9); }
@@ -305,7 +305,7 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 1020px) {
-    .week { grid-template-columns: repeat(4, 1fr); }
+    .week { grid-template-columns: repeat(4, minmax(0,1fr)); }
     .zaal { grid-template-columns: 1fr; }
   }
   @media (max-width: 860px) {
@@ -326,9 +326,9 @@
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 16px; }
-    .week { grid-template-columns: 1fr 1fr; }
+    .week { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
     .day { min-height: 150px; }
-    .row-2 { grid-template-columns: 1fr; }
+    .row-2 { grid-template-columns: minmax(0,1fr); }
     .contact-card { padding: 26px 22px; }
     .zaal { padding: 36px 24px; border-radius: 26px; }
     .fact { padding: 16px 18px; }
@@ -340,6 +340,10 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
   }
+  .field { min-width: 0; }
+  input[type="date"] { -webkit-appearance: none; appearance: none; display: block; min-width: 0; max-width: 100%; min-height: 50px; text-align: left; }
+  input[type="date"]::-webkit-date-and-time-value { text-align: left; }
+  .day { min-width: 0; }
 </style>
 </head>
 <body>
@@ -380,8 +384,8 @@
 
   <div class="marquee" aria-hidden="true">
     <div class="marquee-track">
-      <span>Nieuwe feestzaal</span><span>Plek voor 150 gasten</span><span>Bavaria van de tap</span><span>Dartavond donderdag</span><span>Shot &amp; Cocktail Bar</span><span>Verzoekjes welkom</span><span>Terras</span>
-      <span>Nieuwe feestzaal</span><span>Plek voor 150 gasten</span><span>Bavaria van de tap</span><span>Dartavond donderdag</span><span>Shot &amp; Cocktail Bar</span><span>Verzoekjes welkom</span><span>Terras</span>
+      <span>Nieuwe feestzaal</span><span>Plek voor 150 gasten</span><span>Bavaria en speciaalbieren van de tap</span><span>Dartavond donderdag</span><span>Shot &amp; Cocktail Bar</span><span>Verzoekjes welkom</span><span>Terras</span>
+      <span>Nieuwe feestzaal</span><span>Plek voor 150 gasten</span><span>Bavaria en speciaalbieren van de tap</span><span>Dartavond donderdag</span><span>Shot &amp; Cocktail Bar</span><span>Verzoekjes welkom</span><span>Terras</span>
     </div>
   </div>
 
@@ -408,7 +412,7 @@
           <div class="space-body">
             <span class="space-tag">Bruin café</span>
             <h3>'t Bonneke</h3>
-            <p>Altijd welkom voor een goed gesprek. Met D'n Bonn achter de tap en goede muziek op de achtergrond voel je je hier al snel thuis.</p>
+            <p>Hier schuif je aan voor een goed gesprek en een biertje. Aan de tap staan meerdere bieren, het personeel is gezellig en de muziek staat lekker op de achtergrond.</p>
           </div>
         </article>
         <article class="space reveal">

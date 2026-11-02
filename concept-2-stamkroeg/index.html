@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disco-Bar D'n Bonn · De stamkroeg van Reusel</title>
-<meta name="description" content="Bruin café met Bavaria op de tap, dartavond op donderdag en een nieuwe feestzaal in de voormalige discotheek. Disco-Bar D'n Bonn, Wilhelminalaan 53 in Reusel.">
+<meta name="description" content="Bruin café met Bavaria en speciaalbieren op de tap, dartavond op donderdag en een nieuwe feestzaal in de voormalige discotheek. Disco-Bar D'n Bonn, Wilhelminalaan 53 in Reusel.">
 <meta name="theme-color" content="#2a1810">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -241,7 +241,7 @@
     background-image: radial-gradient(circle at 30% 20%, rgba(255,255,255,.05), transparent 60%);
   }
   .chalkboard h2 { font-family: "Caveat", cursive; font-weight: 700; text-align: center; font-size: clamp(40px, 6vw, 68px); color: #f4f0e4; margin-bottom: 26px; letter-spacing: 0; }
-  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+  .week { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 10px; }
   .day { border: 2px dashed rgba(244,240,228,.35); border-radius: 12px; padding: 16px 12px; display: flex; flex-direction: column; gap: 4px; min-height: 160px; position: relative; text-align: center; }
   .day-name { font-family: "Caveat", cursive; font-weight: 700; font-size: 28px; color: #f4f0e4; }
   .day-time { font-family: "Caveat", cursive; font-weight: 600; font-size: 22px; color: #cfdad2; }
@@ -277,7 +277,7 @@
   .field input, .field textarea { width: 100%; font: inherit; color: var(--cream); background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; transition: border-color .2s, background .2s; }
   .field input:focus, .field textarea:focus { outline: none; border-color: var(--amber); background: rgba(0,0,0,.4); }
   .field textarea { min-height: 120px; resize: vertical; }
-  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .row-2 { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 14px; }
   form .btn { justify-self: start; border: 0; cursor: pointer; margin-top: 6px; }
   .map { border-radius: var(--radius); overflow: hidden; border: 4px solid var(--wood-3); min-height: 420px; }
   .map iframe { width: 100%; height: 100%; min-height: 420px; border: 0; filter: sepia(.55) saturate(.9) brightness(.92) contrast(1.05); }
@@ -293,7 +293,7 @@
 
   /* ---------- Responsive ---------- */
   @media (max-width: 1020px) {
-    .week { grid-template-columns: repeat(4, 1fr); }
+    .week { grid-template-columns: repeat(4, minmax(0,1fr)); }
     .zaal-band, .dart-grid { grid-template-columns: 1fr; }
     .stamp { display: none; }
   }
@@ -314,9 +314,9 @@
   }
   @media (max-width: 560px) {
     .wrap { padding: 0 16px; }
-    .week { grid-template-columns: 1fr 1fr; }
+    .week { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }
     .day { min-height: 130px; }
-    .row-2 { grid-template-columns: 1fr; }
+    .row-2 { grid-template-columns: minmax(0,1fr); }
     .contact-card { padding: 26px 22px; }
     .brand-name small { display: none; }
     .hero { padding-bottom: 60px; }
@@ -326,6 +326,10 @@
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .reveal { opacity: 1; transform: none; }
   }
+  .field { min-width: 0; }
+  input[type="date"] { -webkit-appearance: none; appearance: none; display: block; min-width: 0; max-width: 100%; min-height: 50px; text-align: left; }
+  input[type="date"]::-webkit-date-and-time-value { text-align: left; }
+  .day { min-width: 0; }
 </style>
 </head>
 <body class="wood-bg">
@@ -356,7 +360,7 @@
     <div class="wrap">
       <div class="status" data-status><span class="status-dot"></span><span data-status-text>Openingstijden laden…</span></div>
       <h1>De stamkroeg van <em>Reusel.</em></h1>
-      <p class="lead">Een koud Bavaria van de tap, donderdag dartavond en een gezellig terras. Nu ook met een gloednieuwe feestzaal voor 150 gasten, in de voormalige discotheek.</p>
+      <p class="lead">Een koud biertje van de tap (Bavaria én speciaalbieren), donderdag dartavond en een gezellig terras. Nu ook met een gloednieuwe feestzaal voor 150 gasten, in de voormalige discotheek.</p>
       <div class="hero-actions">
         <a href="#tijden" class="btn btn-primary">Wanneer zijn we open?</a>
         <a href="#feest" class="btn btn-ghost">Feest in de zaal</a>
@@ -366,8 +370,8 @@
 
   <div class="ribbon" aria-hidden="true">
     <div class="ribbon-track">
-      <span>Bavaria op de tap</span><span>Dartavond op donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
-      <span>Bavaria op de tap</span><span>Dartavond op donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
+      <span>Bavaria en speciaalbieren op de tap</span><span>Dartavond op donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
+      <span>Bavaria en speciaalbieren op de tap</span><span>Dartavond op donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
     </div>
   </div>
 
@@ -376,8 +380,8 @@
       <article class="pillar kroeg reveal">
         <span class="eyebrow">De kroeg</span>
         <h2>Gewoon gezellig aan de tap.</h2>
-        <p>Bavaria op de tap, een ruim assortiment en donderdag dartavond. Zes avonden per week open, op het terras of in 't Bonneke.</p>
-        <ul><li>Bavaria op de tap</li><li>Dartavond</li><li>Terras</li><li>Bruin café</li></ul>
+        <p>Bavaria en speciaalbieren op de tap, een ruim assortiment en donderdag dartavond. Gezellig personeel, zes avonden per week open, op het terras of in 't Bonneke.</p>
+        <ul><li>Bavaria en speciaalbieren op de tap</li><li>Dartavond</li><li>Terras</li><li>Bruin café</li></ul>
         <a class="btn btn-ghost" href="#drinken">Bekijk het assortiment</a>
       </article>
       <article class="pillar zaal reveal">
@@ -405,8 +409,8 @@
         </div>
         <div class="t-item reveal">
           <span class="t-when">2012</span>
-          <h3>John Peters neemt het over</h3>
-          <p>In 2012 nam John Peters de zaak over. Sindsdien heet het Disco-Bar D'n Bonn, met een bruin café en een terras.</p>
+          <h3>Een nieuwe start</h3>
+          <p>In 2012 ging de zaak verder als Disco-Bar D'n Bonn, met een bruin café en een terras. Sindsdien zorgt een gezellig team achter de bar voor de sfeer.</p>
         </div>
         <div class="t-item reveal">
           <span class="t-when">Nu</span>
@@ -422,7 +426,7 @@
       <div class="reveal">
         <span class="eyebrow">Elke week</span>
         <h2>Donderdag is <em>dartavond.</em></h2>
-        <p>Pijlen in de hand, Bavaria op de tafel en een volle kroeg die meeschreeuwt bij elke 180. Kom meedoen of gewoon kijken, iedereen is welkom.</p>
+        <p>Pijlen in de hand, een biertje op de tafel en een volle kroeg die meeschreeuwt bij elke 180. Kom meedoen of gewoon kijken, iedereen is welkom.</p>
         <ul class="dart-list">
           <li><span>Woensdag</span> gratis darten</li>
           <li><span>Donderdag</span> competitie en dartavond</li>
@@ -464,7 +468,7 @@
         <h2>Van de tap tot de shot</h2>
         <p class="sub">Een ruim assortiment voor elke stemming. Bij ons begint het met een goed getapt biertje.</p>
         <div class="menu-cols">
-          <div class="menu-item star">Bavaria <em>vers van de tap</em></div>
+          <div class="menu-item star">Bieren van de tap <em>Bavaria &amp; speciaal</em></div>
           <div class="menu-item">Bier <em>op fles</em></div>
           <div class="menu-item">Wijn <em>wit, rosé, rood</em></div>
           <div class="menu-item">Frisdrank <em>& fris</em></div>
@@ -490,7 +494,7 @@
         </article>
         <article class="space reveal">
           <div class="space-img"><img src="https://www.dn-bonn.nl/images/bonneke.jpg" alt="Het bruine café 't Bonneke" loading="lazy"></div>
-          <div class="space-body"><h3>'t Bonneke</h3><p>Altijd welkom voor een goed gesprek. Met D'n Bonn achter de tap en goede muziek op de achtergrond voel je je hier al snel thuis.</p></div>
+          <div class="space-body"><h3>'t Bonneke</h3><p>Hier schuif je aan voor een goed gesprek en een biertje. Aan de tap staan meerdere bieren, het personeel is gezellig en de muziek staat lekker op de achtergrond.</p></div>
         </article>
         <article class="space reveal">
           <div class="space-img"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De nieuwe feestzaal, voorheen de discotheek" loading="lazy"></div>
