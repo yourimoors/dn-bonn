@@ -4,7 +4,7 @@ Nieuwe website voor [dn-bonn.nl](https://www.dn-bonn.nl) (Wilhelminalaan 53, Reu
 
 ## Designconcepten
 
-Deze branch bevat zeven richtingen om aan de eigenaren te laten zien:
+Deze branch bevat zeven richtingen (vier staan op de overzichtspagina, de rest blijft via de directe URL bereikbaar) om aan de eigenaren te laten zien:
 
 | Pad | Concept |
 | --- | --- |
@@ -16,6 +16,7 @@ Deze branch bevat zeven richtingen om aan de eigenaren te laten zien:
 | `/concept-4-memphis-disco/` | Speels 90s Memphis, dikke lijnen en vormen |
 | `/concept-5-minimal-editorial/` | Rustig magazine, veel witruimte |
 | `/concept-6-brabants-feest/` | Vrolijk Brabants, vlaggetjes en rood-wit blokken |
+| `/concept-7-stamkroeg-paars/` | Mix: paarse moderne look + stamkroeg-inhoud + feestzaal |
 
 `assets/app.js` (openingstijden, menu, formulieren) wordt gedeeld door concept 2 t/m 6. `assets/back.js` toont de knop "← Alle concepten" en is alleen voor de presentatie.
 

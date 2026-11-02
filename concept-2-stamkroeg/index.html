@@ -208,6 +208,31 @@
   .phones { display: flex; flex-wrap: wrap; gap: 12px; position: relative; z-index: 1; }
   .zaal-band .btn-primary { background: var(--cream); color: var(--ink); box-shadow: 0 4px 0 #c9b79a; }
 
+  /* ---------- Twee pijlers ---------- */
+  .pillars { padding: 80px 0 0; }
+  .pillars-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .pillar { border-radius: 22px; padding: clamp(28px, 4vw, 46px); display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden; }
+  .pillar.kroeg { background: var(--wood-2); border: 1px solid var(--line); box-shadow: 0 0 0 6px var(--wood-3); }
+  .pillar.zaal { background: var(--brick); box-shadow: 0 0 0 6px var(--wood-3); }
+  .pillar .eyebrow { align-self: flex-start; } .pillar.zaal .eyebrow { color: #ffd68a; }
+  .pillar h2 { font-size: clamp(28px, 3.6vw, 44px); }
+  .pillar p { color: #e5d7bf; max-width: 42ch; } .pillar.zaal p { color: #f3dfd6; }
+  .pillar ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .pillar li { font: 700 13px "DM Sans"; padding: 6px 12px; border-radius: 6px; background: rgba(0,0,0,.28); }
+  .pillar .btn { margin-top: auto; align-self: flex-start; }
+  /* ---------- Feestzaal uitgebreid ---------- */
+  .zaal-pro { background: var(--brick); border-radius: 26px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.05fr; box-shadow: 0 0 0 8px var(--wood-3), 0 30px 50px -20px rgba(0,0,0,.7); }
+  .zaal-photo { position: relative; min-height: 420px; background: linear-gradient(135deg, #5a3519, #2a1810); }
+  .zaal-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .zaal-photo .badge { position: absolute; left: 20px; bottom: 20px; width: 118px; height: 118px; border-radius: 50%; background: var(--cream); color: var(--brick); border: 4px double var(--brick); display: grid; place-items: center; text-align: center; font: 900 40px/1 "Fraunces", serif; transform: rotate(-8deg); }
+  .zaal-photo .badge small { display: block; font: 700 11px "DM Sans"; letter-spacing: .12em; text-transform: uppercase; margin-top: 2px; }
+  .zaal-body { padding: clamp(28px, 4.4vw, 52px); display: flex; flex-direction: column; gap: 14px; }
+  .zaal-body h2 { font-size: clamp(30px, 4vw, 48px); } .zaal-body > p { color: #f3dfd6; }
+  .zaal-body .eyebrow { color: #ffd68a; align-self: flex-start; }
+  .zaal-body form { background: rgba(42,24,16,.5); border-radius: 16px; padding: 20px; margin-top: 6px; }
+  .zaal-body .btn-primary { background: var(--cream); color: var(--ink); box-shadow: 0 4px 0 #c9b79a; }
+  .field select { width: 100%; font: inherit; color: var(--cream); background: rgba(0,0,0,.25); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; } .field select option { color: #111; }
+  @media (max-width: 1020px) { .pillars-grid, .zaal-pro { grid-template-columns: 1fr; } .zaal-photo { min-height: 300px; } }
   /* ---------- Openingstijden (krijtbord) ---------- */
   .board-sec { background: var(--wood-2); }
   .chalkboard {
@@ -346,6 +371,25 @@
     </div>
   </div>
 
+  <section class="pillars">
+    <div class="wrap pillars-grid">
+      <article class="pillar kroeg reveal">
+        <span class="eyebrow">De kroeg</span>
+        <h2>Gewoon gezellig aan de tap.</h2>
+        <p>Bavaria op de tap, een ruim assortiment en donderdag dartavond. Zes avonden per week open, op het terras of in 't Bonneke.</p>
+        <ul><li>Bavaria op de tap</li><li>Dartavond</li><li>Terras</li><li>Bruin café</li></ul>
+        <a class="btn btn-ghost" href="#drinken">Bekijk het assortiment</a>
+      </article>
+      <article class="pillar zaal reveal">
+        <span class="eyebrow">Nieuw · De feestzaal</span>
+        <h2>Vier je feest bij ons.</h2>
+        <p>De voormalige discotheek is omgebouwd tot feestzaal voor maximaal 150 gasten. Kies uit twee arrangementen.</p>
+        <ul><li>Tot 150 gasten</li><li>2 arrangementen</li><li>Eigen bar</li></ul>
+        <a class="btn btn-primary" style="background:var(--cream);color:var(--ink);box-shadow:0 4px 0 #c9b79a" href="#feest">Zaal aanvragen</a>
+      </article>
+    </div>
+  </section>
+
   <section id="historie" class="history">
     <div class="wrap">
       <div class="section-head reveal">
@@ -458,20 +502,28 @@
 
   <section id="feest" style="padding-top:0">
     <div class="wrap">
-      <div class="zaal-band reveal">
-        <div style="position:relative;z-index:1">
+      <div class="zaal-pro reveal">
+        <div class="zaal-photo"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal van D'n Bonn" loading="lazy" onerror="this.remove()"><div class="badge"><span>150<small>gasten</small></span></div></div>
+        <div class="zaal-body">
           <span class="eyebrow">Nieuw bij ons</span>
           <h2>Vier je feest in onze nieuwe zaal.</h2>
-          <p>Verjaardag, jubileum of familiefeest: onze nieuwe feestzaal biedt plek aan 150 gasten. Kies uit twee arrangementen of bel ons even voor de mogelijkheden.</p>
+          <p>Verjaardag, jubileum of familiefeest in de omgebouwde discotheek. Maximaal 150 gasten, twee arrangementen. Bel ons of laat hieronder je wensen achter.</p>
           <div class="phones">
             <a class="btn btn-primary" href="tel:+31618941094">06 18 94 10 94</a>
             <a class="btn btn-ghost" href="tel:+31638063047">06 38 06 30 47</a>
-            <a class="btn btn-ghost" href="mailto:info@dn-bonn.nl?subject=Feestzaal%20bij%20D'n%20Bonn">Mail ons</a>
           </div>
-        </div>
-        <div class="zaal-nums">
-          <div><b>150</b><span>gasten</span></div>
-          <div><b>2</b><span>arrangementen</span></div>
+          <form data-mailto data-subject="Aanvraag feestzaal D'n Bonn">
+            <div class="row-2">
+              <div class="field"><label for="z-date">Gewenste datum</label><input id="z-date" name="date" type="date"></div>
+              <div class="field"><label for="z-n">Aantal gasten</label><input id="z-n" name="guests" type="number" min="1" max="150" placeholder="max 150" inputmode="numeric"></div>
+            </div>
+            <div class="row-2">
+              <div class="field"><label for="z-arr">Arrangement</label><select id="z-arr" name="arrangement"><option value="">Weet ik nog niet</option><option>Arrangement 1</option><option>Arrangement 2</option></select></div>
+              <div class="field"><label for="z-name">Naam *</label><input id="z-name" name="name" required autocomplete="name"></div>
+            </div>
+            <div class="field"><label for="z-contact">Telefoon of e-mail *</label><input id="z-contact" name="contact" required data-label="Contact"></div>
+            <button class="btn btn-primary" type="submit">Verstuur aanvraag</button>
+          </form>
         </div>
       </div>
     </div>
