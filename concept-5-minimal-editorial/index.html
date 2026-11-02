@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Disco-Bar D'n Bonn · Reusel</title>
+<meta name="description" content="Bruin café, terras en een nieuwe feestzaal voor 150 gasten in Reusel. Disco-Bar D'n Bonn.">
+<meta name="theme-color" content="#f6f3ee">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+  body { background: var(--bg); color: var(--fg); font: 400 17px/1.65 var(--font-b); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--accent2); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: var(--max, 1180px); margin: 0 auto; padding: 0 24px; }
+  h1, h2, h3 { font-family: var(--font-h); line-height: 1.05; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 28px; border-radius: var(--btn-radius, 999px); font: 700 16px var(--font-b); text-decoration: none; cursor: pointer; border: 0; transition: transform .15s ease, box-shadow .15s ease, background .15s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .nav { position: sticky; top: 0; z-index: 60; background: var(--nav-bg); border-bottom: var(--nav-border, 0); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 16px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+  .brand-mark { width: 54px; height: 57px; flex: none; border-radius: 8px; background: #fff url("https://www.dn-bonn.nl/style/top.png") -6.75px -13px / 432px 81px no-repeat; border: var(--logo-border, 0); }
+  .brand-name { font: 800 19px/1.1 var(--font-h); }
+  .brand-name small { display: block; font: 600 11px var(--font-b); letter-spacing: .16em; text-transform: uppercase; opacity: .65; margin-top: 2px; }
+  .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+  .nav-links a { text-decoration: none; font-weight: 600; font-size: 15px; padding: 9px 14px; border-radius: 999px; }
+  .nav-links a:not(.btn):hover { background: var(--hover); }
+  .nav-links .btn { padding: 10px 20px; font-size: 14px; }
+  .menu-toggle { display: none; background: none; border: 2px solid currentColor; border-radius: 10px; width: 46px; height: 46px; cursor: pointer; color: inherit; }
+  .status { display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px 8px 12px; border-radius: 999px; background: var(--status-bg); font-size: 14px; font-weight: 600; }
+  .status-dot { width: 10px; height: 10px; border-radius: 50%; background: #9a9aa8; }
+  .status.open .status-dot { background: #1fc16b; box-shadow: 0 0 0 0 rgba(31,193,107,.6); animation: pulse 2s infinite; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(31,193,107,0); } 100% { box-shadow: 0 0 0 0 rgba(31,193,107,0); } }
+  section { padding: 100px 0; position: relative; }
+  .section-head { margin-bottom: 48px; max-width: 680px; }
+  .section-head p { color: var(--muted); font-size: 18px; margin-top: 12px; }
+  .spaces { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .space-img { aspect-ratio: 4/3; overflow: hidden; background: var(--img-bg, #888); }
+  .space-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .space:hover .space-img img { transform: scale(1.05); }
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; }
+  .day { padding: 18px 14px; display: flex; flex-direction: column; gap: 4px; min-height: 150px; position: relative; }
+  .day-name { font: 800 17px var(--font-h); }
+  .day-time { font-size: 14.5px; opacity: .75; font-variant-numeric: tabular-nums; }
+  .day-extra { margin-top: auto; align-self: flex-start; font-size: 12.5px; font-weight: 700; line-height: 1.25; padding: 5px 9px; border-radius: 8px; background: var(--accent2); color: var(--on-accent2); }
+  .day.closed { opacity: .5; }
+  .day.today::before { content: "Vandaag"; position: absolute; top: -12px; left: 12px; background: var(--fg); color: var(--bg); font: 800 11px var(--font-b); letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; }
+  .albums { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .album { position: relative; display: block; text-decoration: none; overflow: hidden; border-radius: var(--radius); }
+  .album img { width: 100%; aspect-ratio: 16/10; object-fit: cover; background: var(--img-bg, #888); transition: transform .6s ease; }
+  .album:hover img { transform: scale(1.04); }
+  .album-label { padding: 16px 20px; }
+  .album-label h3 { font-size: 22px; }
+  .album-label small { display: block; opacity: .7; font-size: 14px; margin-top: 4px; }
+  .contact { display: grid; grid-template-columns: 1fr 1.1fr; gap: 24px; }
+  .contact-card { padding: 34px; }
+  .contact-list { list-style: none; display: grid; gap: 18px; margin-bottom: 28px; }
+  .contact-list li { display: flex; gap: 16px; align-items: flex-start; }
+  .contact-list .ic { width: 42px; height: 42px; border-radius: 12px; flex: none; display: grid; place-items: center; background: var(--accent2); color: var(--on-accent2); }
+  .contact-list small { display: block; font: 700 12px var(--font-b); text-transform: uppercase; letter-spacing: .1em; opacity: .65; }
+  .contact-list a { text-decoration: none; font-weight: 600; }
+  form { display: grid; gap: 14px; }
+  .field { display: grid; gap: 6px; }
+  .field label { font: 700 13px var(--font-b); opacity: .8; }
+  .field input, .field textarea { width: 100%; font: inherit; color: inherit; background: var(--field-bg); border: var(--field-border); border-radius: 12px; padding: 13px 15px; }
+  .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--focus); }
+  .field textarea { min-height: 120px; resize: vertical; }
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  form .btn { justify-self: start; }
+  .map { border-radius: var(--radius); overflow: hidden; min-height: 400px; }
+  .map iframe { width: 100%; height: 100%; min-height: 400px; border: 0; }
+  .phones { display: flex; flex-wrap: wrap; gap: 12px; }
+  footer { padding: 44px 0 40px; font-size: 15px; }
+  footer .wrap { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; }
+  footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
+  footer a { text-decoration: none; }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (max-width: 1020px) { .week { grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 860px) {
+    .spaces, .albums, .contact { grid-template-columns: 1fr; }
+    .menu-toggle { display: grid; place-items: center; }
+    .nav-links { position: fixed; inset: 76px 0 auto; flex-direction: column; align-items: stretch; background: var(--nav-bg); padding: 16px 20px 24px; border-bottom: var(--nav-border, 1px solid rgba(0,0,0,.1)); transform: translateY(calc(-100% - 90px)); visibility: hidden; transition: transform .3s ease, visibility 0s .3s; z-index: -1; }
+    .nav.open .nav-links { transform: none; visibility: visible; transition: transform .3s ease; }
+    .nav-links a { font-size: 18px; padding: 14px 16px; }
+    .nav-links .btn { margin-top: 8px; }
+    section { padding: 72px 0; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 16px; }
+    .week { grid-template-columns: 1fr 1fr; }
+    .day { min-height: 120px; }
+    .row-2 { grid-template-columns: 1fr; }
+    .contact-card { padding: 24px 20px; }
+    .brand-name small { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1; transform: none; } }
+
+  :root { --bg: #f6f3ee; --fg: #141414; --muted: #6a665e; --font-h: "Instrument Serif", Georgia, serif; --font-b: "Inter", system-ui, sans-serif;
+    --accent: #b3261e; --accent2: #141414; --on-accent2: #f6f3ee; --nav-bg: rgba(246,243,238,.92); --nav-border: 1px solid #141414; --hover: #e9e4da; --status-bg: transparent; --radius: 0px; --max: 1240px; --btn-radius: 0px;
+    --field-bg: transparent; --field-border: 1px solid #141414; --focus: rgba(179,38,30,.18); --line: #141414; --img-bg: #d8d2c5; }
+  body { font-size: 17px; }
+  h1, h2, h3 { font-weight: 400; letter-spacing: -.02em; }
+  .nav { backdrop-filter: blur(10px); }
+  .brand-mark { border-radius: 0; }
+  .nav-links a { border-radius: 0; font-weight: 500; }
+  .btn { border: 1px solid var(--fg); box-shadow: none; padding: 16px 30px; font-weight: 600; }
+  .btn:hover { transform: none; }
+  .btn-cta, .btn-solid { background: var(--fg); color: var(--bg); }
+  .btn-cta:hover, .btn-solid:hover { background: var(--accent); border-color: var(--accent); }
+  .btn-line { background: transparent; color: var(--fg); }
+  .btn-line:hover { background: var(--fg); color: var(--bg); }
+  .status { padding: 0; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+  .hero { padding: 90px 0 0; border-bottom: 1px solid var(--line); }
+  .hero-top { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: end; padding-bottom: 36px; }
+  .hero h1 { font-size: clamp(64px, 13vw, 190px); line-height: .88; margin-top: 26px; }
+  .hero h1 em { color: var(--accent); }
+  .hero-meta { max-width: 300px; font-size: 15px; color: var(--muted); padding-bottom: 14px; }
+  .hero-meta p + p { margin-top: 14px; }
+  .hero-photo { height: min(62vh, 560px); background: var(--img-bg); overflow: hidden; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.85) contrast(1.05); }
+  .intro { display: grid; grid-template-columns: 1fr 2fr; gap: 56px; border-bottom: 1px solid var(--line); }
+  .label { font: 600 12px var(--font-b); letter-spacing: .16em; text-transform: uppercase; }
+  .intro p.big { font: 400 clamp(26px, 3.6vw, 44px)/1.2 var(--font-h); letter-spacing: -.01em; }
+  .intro p.big em { color: var(--accent); }
+  .list { border-top: 1px solid var(--line); }
+  .row { display: grid; grid-template-columns: 70px 1.2fr 1.6fr 1fr; gap: 28px; align-items: center; padding: 28px 0; border-bottom: 1px solid var(--line); transition: background .2s, padding .2s; }
+  .row:hover { background: #ece7dd; padding-inline: 14px; }
+  .row .n { font: 400 22px var(--font-h); color: var(--muted); }
+  .row h3 { font-size: clamp(30px, 4vw, 52px); }
+  .row p { color: var(--muted); font-size: 16px; }
+  .row .thumb { aspect-ratio: 4/3; background: var(--img-bg); overflow: hidden; }
+  .row .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .section-head h2 { font-size: clamp(40px, 6.4vw, 88px); margin-top: 14px; }
+  .zaal-ed { display: grid; grid-template-columns: 1.1fr 1fr; gap: 0; border: 1px solid var(--line); }
+  .zaal-ed .ph { min-height: 480px; background: var(--img-bg); overflow: hidden; } .zaal-ed .ph img { width: 100%; height: 100%; object-fit: cover; }
+  .zaal-ed .tx { padding: clamp(28px, 5vw, 64px); display: flex; flex-direction: column; justify-content: center; gap: 20px; background: var(--fg); color: var(--bg); }
+  .zaal-ed h2 { font-size: clamp(44px, 6vw, 84px); }
+  .zaal-ed h2 em { color: #ff8a80; }
+  .zaal-ed p { color: #cfc9bd; max-width: 44ch; }
+  .zaal-ed .stats { display: flex; gap: 36px; padding: 18px 0; border-block: 1px solid rgba(246,243,238,.3); }
+  .zaal-ed .stats b { display: block; font: 400 52px/1 var(--font-h); } .zaal-ed .stats span { font-size: 13px; color: #cfc9bd; }
+  .zaal-ed .btn-cta { background: var(--bg); color: var(--fg); border-color: var(--bg); } .zaal-ed .btn-cta:hover { background: #ff8a80; border-color: #ff8a80; }
+  .zaal-ed .btn-line { color: var(--bg); border-color: var(--bg); } .zaal-ed .btn-line:hover { background: var(--bg); color: var(--fg); }
+  .quote { text-align: center; padding: 90px 0; border-block: 1px solid var(--line); }
+  .quote p { font: 400 clamp(34px, 6vw, 84px)/1 var(--font-h); letter-spacing: -.02em; max-width: 16ch; margin: 0 auto; } .quote em { color: var(--accent); }
+  .quote small { display: block; margin-top: 22px; font: 600 12px var(--font-b); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .day { border-top: 1px solid var(--line); border-radius: 0; padding: 18px 0; min-height: 150px; }
+  .day-name { font: 400 26px var(--font-h); } .day-extra { border-radius: 0; background: var(--accent); color: #fff; }
+  .day.today { background: #ece7dd; padding-inline: 12px; } .day.today::before { top: -1px; left: 0; border-radius: 0; background: var(--accent); color: #fff; }
+  .week { gap: 0 20px; }
+  .card { background: transparent; border: 1px solid var(--line); }
+  .album { border: 1px solid var(--line); } .album-label { border-top: 1px solid var(--line); background: var(--bg); }
+  .contact-list .ic { border-radius: 0; } .field input, .field textarea { border-radius: 0; }
+  .map iframe { filter: grayscale(1) contrast(1.05); }
+  footer { border-top: 1px solid var(--line); color: var(--muted); } footer a:hover { color: var(--accent); }
+  @media (max-width: 1020px) { .hero-top, .intro, .zaal-ed { grid-template-columns: 1fr; } .row { grid-template-columns: 50px 1fr; } .row p, .row .thumb { grid-column: 2; } .zaal-ed .ph { min-height: 300px; } }
+</style>
+</head>
+<body>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a href="#top" class="brand" aria-label="D'n Bonn, naar boven">
+      <span class="brand-mark" role="img" aria-label="Logo Disco-Bar d'n bonn"></span>
+      <span class="brand-name">D'n Bonn<small>Café · Terras · Zaal</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Menu openen" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#zaak">De zaak</a></li>
+      <li><a href="#feest">Feestzaal</a></li>
+      <li><a href="#tijden">Openingstijden</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#feest" class="btn btn-cta">Zaal aanvragen</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top">
+        <div><div class="status" data-status><span class="status-dot"></span><span data-status-text>Openingstijden laden…</span></div><h1>Gezellig&shy;heid in <em>de Kempen.</em></h1></div>
+        <div class="hero-meta"><p>Terras, bruin café en een nieuwe feestzaal voor 150 gasten, aan de Wilhelminalaan in Reusel.</p><p><a class="btn btn-solid" href="#feest">Bekijk de zaal</a></p></div>
+      </div>
+    </div>
+    <div class="hero-photo"><img src="https://www.dn-bonn.nl/images/discotheek-dnbonn-reusel.jpg" alt="De paars verlichte bar van D'n Bonn" onerror="this.remove()"></div>
+  </section>
+
+  <section class="intro-sec" style="padding:80px 0">
+    <div class="wrap intro" style="padding-bottom:80px">
+      <span class="label">Over ons</span>
+      <p class="big reveal">Een bruin café met <em>Bavaria op de tap</em>, een dartavond op donderdag en sinds kort een feestzaal die in de voormalige discotheek is gebouwd. In 2012 overgenomen door John Peters, voorheen bekend als Red Coral Bar.</p>
+    </div>
+  </section>
+
+  <section id="zaak" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="label">De zaak</span><h2>Drie plekken.</h2></div>
+      <div class="list">
+        <div class="row reveal"><span class="n">01</span><h3>Terras</h3><p>Heerlijk uitrusten na een fietstocht door de Kempen, of gezellig afspreken met vrienden. Geniet van de Brabantse gezelligheid met een drankje en een hapje.</p><div class="thumb"><img src="https://www.dn-bonn.nl/images/terras2.jpg" alt="Het terras" loading="lazy"></div></div>
+        <div class="row reveal"><span class="n">02</span><h3>'t Bonneke</h3><p>Altijd welkom voor een goed gesprek. Met D'n Bonn achter de tap en goede muziek op de achtergrond voel je je hier al snel thuis.</p><div class="thumb"><img src="https://www.dn-bonn.nl/images/bonneke.jpg" alt="Het bruine café 't Bonneke" loading="lazy"></div></div>
+        <div class="row reveal"><span class="n">03</span><h3>Feestzaal</h3><p>Onze voormalige discotheek is omgebouwd tot feestzaal voor maximaal 150 gasten. Dé plek voor jouw verjaardag, jubileum of bedrijfsfeest.</p><div class="thumb"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal, voorheen de discotheek" loading="lazy"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="feest">
+    <div class="wrap">
+      <div class="zaal-ed reveal">
+        <div class="ph"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal van D'n Bonn" loading="lazy" onerror="this.remove()"></div>
+        <div class="tx">
+          <span class="label">Nieuw · Feestzaal</span>
+          <h2>Vier het <em>bij ons.</em></h2>
+          <p>De ruimte van onze voormalige discotheek is omgebouwd tot feestzaal. Verjaardag, jubileum of bedrijfsfeest: kies uit twee arrangementen of bel voor een voorstel op maat.</p>
+          <div class="stats"><div><b>150</b><span>gasten maximaal</span></div><div><b>2</b><span>arrangementen</span></div></div>
+          <div class="phones"><a class="btn btn-cta" href="tel:+31618941094">06 18 94 10 94</a><a class="btn btn-line" href="tel:+31638063047">06 38 06 30 47</a><a class="btn btn-line" href="mailto:info@dn-bonn.nl?subject=Feestzaal%20bij%20D'n%20Bonn">Mail ons</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote"><div class="wrap reveal"><p>Donderdag is <em>dartavond.</em></p><small>Woensdag gratis darten · zondag gratis broodje</small></div></div>
+
+  <section id="tijden">
+    <div class="wrap">
+      <div class="section-head reveal"><span class="label">Openingstijden</span><h2>Zes avonden per week.</h2><p>Maandag gesloten.</p></div>
+      <div class="week reveal" id="week"></div>
+    </div>
+  </section>
+
+  <section id="fotos" style="padding-top:0"><div class="wrap">
+    <div class="section-head reveal"><span class="label">Fotoalbum</span><h2>Zoek jezelf terug.</h2></div>
+    <div class="albums">
+        <a class="album card reveal" href="https://www.facebook.com/pg/dn.bonn/photos/?tab=album&amp;album_id=500600030029171" target="_blank" rel="noopener">
+          <img src="https://www.dn-bonn.nl/images/1185493_500599166695924_1723571368_n.jpg" alt="Stappen bij D'n Bonn" loading="lazy">
+          <div class="album-label"><h3>Stappen @ D'n Bonn</h3><small>Album op Facebook →</small></div>
+        </a>
+        <a class="album card reveal" href="https://www.facebook.com/pg/dn.bonn/photos/?tab=album&amp;album_id=548702215218952" target="_blank" rel="noopener">
+          <img src="https://www.dn-bonn.nl/images/11000654_798502503572254_7008382119285902711_o.jpg" alt="Vrijdagavond event bij D'n Bonn" loading="lazy">
+          <div class="album-label"><h3>Vrijdagavond Events</h3><small>Album op Facebook →</small></div>
+        </a>
+      </div>
+  </div></section>
+
+  <section id="contact" style="padding-top:0"><div class="wrap">
+    <div class="section-head reveal"><span class="label">Contact</span><h2>Kom langs.</h2></div>
+    <div class="contact">
+        <div class="contact-card card reveal">
+          <ul class="contact-list">
+            <li><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>Adres</small><a href="https://maps.google.com/?q=Wilhelminalaan+53,+5541CT+Reusel" target="_blank" rel="noopener">Wilhelminalaan 53<br>5541 CT Reusel</a></div></li>
+            <li><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><div><small>Telefoon</small><a href="tel:+31497641414">0497 64 14 14</a></div></li>
+            <li><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span><div><small>E-mail</small><a href="mailto:info@dn-bonn.nl">info@dn-bonn.nl</a></div></li>
+          </ul>
+          <form data-mailto data-subject="Bericht via de website">
+            <div class="row-2">
+              <div class="field"><label for="f-name">Naam *</label><input id="f-name" name="name" required autocomplete="name"></div>
+              <div class="field"><label for="f-email">E-mail</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+            </div>
+            <div class="field"><label for="f-subject">Onderwerp</label><input id="f-subject" name="subject"></div>
+            <div class="field"><label for="f-msg">Bericht *</label><textarea id="f-msg" name="message" required></textarea></div>
+            <button class="btn btn-solid" type="submit">Verstuur bericht</button>
+          </form>
+        </div>
+        <div class="map card reveal"><iframe title="Kaart: Wilhelminalaan 53, Reusel" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Wilhelminalaan%2053%2C%205541CT%20Reusel&amp;z=15&amp;output=embed"></iframe></div>
+      </div>
+  </div></section>
+</main>
+<footer>
+  <div class="wrap">
+    <span>© <span id="year"></span> Disco-Bar D'n Bonn · Wilhelminalaan 53, Reusel</span>
+    <nav>
+      <a href="#zaak">De zaak</a>
+      <a href="#feest">Feestzaal</a>
+      <a href="#tijden">Openingstijden</a>
+      <a href="https://www.facebook.com/dn.bonn" target=_blank rel=noopener>Facebook</a>
+    </nav>
+  </div>
+</footer>
+<script src="../assets/app.js"></script>
+<script src="../assets/back.js"></script>
+</body>
+</html>
