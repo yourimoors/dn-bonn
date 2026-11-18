@@ -65,23 +65,75 @@
     }
   }
 
-  // Formulieren met data-mailto: openen de mailapp van de bezoeker (geen server nodig).
-  // Koppel later een dienst als Formspree als er echt verstuurd moet worden.
-  document.querySelectorAll("form[data-mailto]").forEach(form => form.addEventListener("submit", e => {
-    e.preventDefault();
-    const f = new FormData(form);
-    const lines = [];
-    form.querySelectorAll("input, select, textarea").forEach(el => {
-      const v = f.get(el.name);
-      if (!el.name || !v || el.name === "message") return;
-      const label = el.dataset.label || (el.labels && el.labels[0] ? el.labels[0].textContent.replace("*", "").trim() : el.name);
-      lines.push(`${label}: ${v}`);
+  // ---------------------------------------------------------------
+  // FORMULIEREN via Formspree
+  // Vul hieronder de adressen in die Formspree geeft, bijvoorbeeld
+  //   contact: "https://formspree.io/f/abcdwxyz"
+  // Beide formulieren mogen hetzelfde adres gebruiken. Zolang een adres leeg is,
+  // opent de site het mailprogramma van de bezoeker (mailto), zodat niets stuk gaat.
+  // ---------------------------------------------------------------
+  const FORMSPREE = Object.assign({
+    contact: "",    // contactformulier onderaan de pagina
+    feestzaal: "",  // aanvraag feestzaal
+  }, window.FORMSPREE_ENDPOINTS || {});
+  const FALLBACK_MAIL = "info@dn-bonn.nl";
+  const MSG = {
+    sending: "Bezig met versturen…",
+    ok: "Bedankt! Je bericht is verstuurd. We nemen zo snel mogelijk contact met je op.",
+    err: "Versturen is niet gelukt. Probeer het opnieuw of bel ons: 06 38 06 30 47.",
+  };
+
+  document.querySelectorAll("form[data-mailto]").forEach(form => {
+    const btn = form.querySelector('button[type="submit"]');
+    let note = form.querySelector(".form-status");
+    if (!note) { note = document.createElement("p"); note.className = "form-status"; note.setAttribute("role", "status"); note.setAttribute("aria-live", "polite"); (btn || form).after(note); }
+
+    // verborgen valstrik tegen spambots (veld mag leeg blijven)
+    if (!form.querySelector('[name="_gotcha"]')) {
+      const hp = document.createElement("input");
+      hp.type = "text"; hp.name = "_gotcha"; hp.tabIndex = -1; hp.autocomplete = "off"; hp.setAttribute("aria-hidden", "true");
+      hp.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;opacity:0";
+      form.appendChild(hp);
+    }
+
+    form.addEventListener("submit", async e => {
+      e.preventDefault();
+      const endpoint = FORMSPREE[form.dataset.form];
+      const f = new FormData(form);
+      const subject = f.get("subject") || form.dataset.subject || "Bericht via de website";
+
+      if (!endpoint) { // geen Formspree-adres ingevuld: mailprogramma openen
+        const lines = [];
+        form.querySelectorAll("input, select, textarea").forEach(el => {
+          const v = f.get(el.name);
+          if (!el.name || !v || el.name === "message" || el.name === "_gotcha") return;
+          const label = el.dataset.label || (el.labels && el.labels[0] ? el.labels[0].textContent.replace("*", "").trim() : el.name);
+          lines.push(`${label}: ${v}`);
+        });
+        const msg = f.get("message");
+        location.href = `mailto:${FALLBACK_MAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent((msg ? msg + "\n\n" : "") + lines.join("\n"))}`;
+        return;
+      }
+
+      // Formspree: onderwerp meesturen, en antwoord-adres als de bezoeker een e-mailadres gaf
+      f.set("subject", subject);
+      const contact = String(f.get("contact") || "");
+      if (!f.get("email") && /^\S+@\S+\.\S+$/.test(contact)) f.set("email", contact);
+
+      note.className = "form-status"; note.textContent = MSG.sending;
+      if (btn) btn.disabled = true;
+      try {
+        const res = await fetch(endpoint, { method: "POST", body: f, headers: { Accept: "application/json" } });
+        if (!res.ok) throw new Error(res.status);
+        form.reset();
+        note.className = "form-status ok"; note.textContent = MSG.ok;
+      } catch (err) {
+        note.className = "form-status err"; note.textContent = MSG.err;
+      } finally {
+        if (btn) btn.disabled = false;
+      }
     });
-    const msg = f.get("message");
-    const body = (msg ? msg + "\n\n" : "") + lines.join("\n");
-    const subject = f.get("subject") || form.dataset.subject || "Bericht via de website";
-    location.href = `mailto:info@dn-bonn.nl?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-  }));
+  });
 
   // Scroll-reveal
   const io = new IntersectionObserver(entries => entries.forEach(en => {
