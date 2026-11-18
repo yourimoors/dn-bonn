@@ -73,8 +73,8 @@
   // opent de site het mailprogramma van de bezoeker (mailto), zodat niets stuk gaat.
   // ---------------------------------------------------------------
   const FORMSPREE = Object.assign({
-    contact: "",    // contactformulier onderaan de pagina
-    feestzaal: "",  // aanvraag feestzaal
+    contact: "https://formspree.io/f/mwlobanr",    // contactformulier onderaan de pagina
+    feestzaal: "https://formspree.io/f/mrpqkrao",  // aanvraag feestzaal
   }, window.FORMSPREE_ENDPOINTS || {});
   const FALLBACK_MAIL = "info@dn-bonn.nl";
   const MSG = {
