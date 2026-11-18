@@ -1,0 +1,33 @@
+# Disco-Bar D'n Bonn: instellingen voor Apache op Mijndomein (Plesk)
+# Dit bestand vervangt de .htaccess van de oude WordPress-site.
+
+DirectoryIndex index.html
+Options -Indexes
+
+# Oude WordPress-onderdelen blokkeren, voor het geval er nog bestanden op de server staan
+RedirectMatch 404 (?i)^/(wp-admin|wp-includes|wp-content|wp-login\.php|xmlrpc\.php|wp-json|wp-cron\.php)
+
+# Verborgen bestanden nooit tonen
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Foto's en scripts een tijdje onthouden door de browser
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 day"
+  ExpiresByType application/javascript "access plus 1 day"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+</IfModule>
+
+# HTTPS-omleiding: zet die aan in Plesk (Websites & domeinen > Hosting-instellingen),
+# niet hier, dan kan het niet misgaan met het certificaat.

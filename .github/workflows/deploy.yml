@@ -1,0 +1,54 @@
+name: Deploy naar Mijndomein (FTP)
+
+# Draait bij elke wijziging op main, en handmatig via Actions > "Run workflow".
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ftp
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      FTP_HOST: ${{ secrets.FTP_HOST }}
+      FTP_USER: ${{ secrets.FTP_USER }}
+      FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+      FTP_DIR: ${{ secrets.FTP_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Controleer dat de GitHub-secrets zijn ingevuld
+        run: |
+          for v in FTP_HOST FTP_USER FTP_PASSWORD FTP_DIR; do
+            if [ -z "${!v}" ]; then echo "::error::GitHub-secret $v ontbreekt (Settings > Secrets and variables > Actions)"; exit 1; fi
+          done
+
+      - name: Bestanden klaarzetten
+        run: |
+          mkdir site
+          cp index.html .htaccess site/
+          cp -r assets site/assets
+          if [ -d images ]; then cp -r images site/images; fi
+          find site -type f | sort
+
+      - name: lftp installeren
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Uploaden via FTPS (er wordt niets op de server verwijderd)
+        run: |
+          cat > deploy.lftp <<LFTP
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set net:max-retries 3
+          set net:timeout 30
+          mirror -R --verbose --no-perms ./site "$FTP_DIR"
+          quit
+          LFTP
+          lftp -u "$FTP_USER,$FTP_PASSWORD" "ftp://$FTP_HOST" -f deploy.lftp

@@ -19,3 +19,15 @@ Nieuwe website voor [dn-bonn.nl](https://www.dn-bonn.nl) (Wilhelminalaan 53, Reu
 ## Formulieren (Formspree)
 
 Beide formulieren staan klaar voor Formspree. Vul in `assets/app.js` bij `FORMSPREE` de adressen in (`https://formspree.io/f/...`). Zolang een adres leeg is, opent de site het mailprogramma van de bezoeker. Het onderwerp, de spamvalstrik (`_gotcha`) en het antwoord-adres worden automatisch meegestuurd.
+
+## Live zetten op Mijndomein (FTP)
+
+De workflow `.github/workflows/deploy.yml` uploadt bij elke push naar `main` de site via FTPS naar Mijndomein. Er wordt niets op de server verwijderd.
+
+Stel eerst in GitHub (Settings > Secrets and variables > Actions) deze secrets in:
+
+- `FTP_HOST`: de FTP-server (te vinden in Plesk bij FTP)
+- `FTP_USER` en `FTP_PASSWORD`: een FTP-account dat alleen bij de map van de site kan
+- `FTP_DIR`: de map op de server, meestal `/httpdocs/`
+
+`.htaccess` zorgt dat `index.html` de oude WordPress `index.php` vervangt en blokkeert de oude WordPress-adressen. Zet de HTTPS-omleiding aan in Plesk.
