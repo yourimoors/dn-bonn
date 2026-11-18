@@ -5,7 +5,7 @@
   const HOURS = [
     { name: "Zondag",    open: "14:00", close: "01:00", extra: "Gratis broodje" },
     { name: "Maandag",   closed: true },
-    { name: "Dinsdag",   open: "20:00", close: "01:00" },
+    { name: "Dinsdag",   closed: true },
     { name: "Woensdag",  open: "20:00", close: "01:00", extra: "Gratis darten" },
     { name: "Donderdag", open: "20:00", close: "01:00", extra: "Dartavond" },
     { name: "Vrijdag",   open: "20:00", close: "02:00" },

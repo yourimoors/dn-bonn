@@ -32,3 +32,5 @@ Importeer de repo in Vercel als "Other" / statische site (geen build command, ou
 - Het contactformulier opent het mailprogramma van de bezoeker (`mailto:`). Voor echt versturen: koppel een dienst zoals Formspree.
 - Openingstijden staan in de `HOURS`-lijst (in `index.html` bij concept 1 en origineel, in `assets/app.js` bij concept 2 t/m 6).
 - Concept 3: de inhoud van de twee arrangementen is voorbeeldtekst tot de echte inhoud bekend is.
+- Veranda: de foto volgt. In elk concept staat een plek met het opschrift "Foto volgt binnenkort" (class `veranda-ph`). Zodra de nieuwe foto's er zijn, worden alle foto's vervangen door nieuwe.
+- Openingstijden: vijf avonden per week open (maandag en dinsdag gesloten). Zie `HOURS`.

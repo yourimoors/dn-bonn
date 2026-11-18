@@ -330,6 +330,14 @@
   input[type="date"] { -webkit-appearance: none; appearance: none; display: block; min-width: 0; max-width: 100%; min-height: 50px; text-align: left; }
   input[type="date"]::-webkit-date-and-time-value { text-align: left; }
   .day { min-width: 0; }
+
+  /* Veranda: foto volgt */
+  .veranda-ph { display: grid !important; place-items: center; text-align: center; color: rgba(255,255,255,.8); background: repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 14px, transparent 14px 28px), var(--img-bg, #3a2a5a) !important; }
+  .veranda-ph span { font: 700 14px/1.3 system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; padding: 0 16px; }
+  @media (min-width: 861px) { .spaces { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  .veranda-band { display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: center; background: var(--board); border: 8px solid var(--wood-3); border-radius: 16px; padding: clamp(26px, 4vw, 46px); }
+  .veranda-band h2 { font-size: clamp(30px, 4.2vw, 50px); margin-top: 4px; } .veranda-band p { color: #cfdad2; font-size: 18px; }
+  @media (max-width: 860px) { .veranda-band { grid-template-columns: 1fr; gap: 14px; } }
 </style>
 </head>
 <body class="wood-bg">
@@ -360,7 +368,7 @@
     <div class="wrap">
       <div class="status" data-status><span class="status-dot"></span><span data-status-text>Openingstijden laden…</span></div>
       <h1>De stamkroeg van <em>Reusel.</em></h1>
-      <p class="lead">Een koud biertje van de tap (Bavaria én speciaalbieren), donderdag dartavond en een gezellig terras. Nu ook met een gloednieuwe feestzaal voor 150 gasten, in de voormalige discotheek.</p>
+      <p class="lead">Een koud biertje van de tap (Bavaria én speciaalbieren), donderdag dartavond en een gezellig terras. Nu ook met een gloednieuwe feestzaal voor 120 gasten, in de voormalige discotheek.</p>
       <div class="hero-actions">
         <a href="#tijden" class="btn btn-primary">Wanneer zijn we open?</a>
         <a href="#feest" class="btn btn-ghost">Feest in de zaal</a>
@@ -370,8 +378,8 @@
 
   <div class="ribbon" aria-hidden="true">
     <div class="ribbon-track">
-      <span>Bavaria en speciaalbieren op de tap</span><span>Dartavond op donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
-      <span>Bavaria en speciaalbieren op de tap</span><span>Dartavond op donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
+      <span>Bavaria en speciaalbieren op de tap</span><span>Dartavond op donderdag</span><span>Sportavonden op de veranda</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
+      <span>Bavaria en speciaalbieren op de tap</span><span>Dartavond op donderdag</span><span>Sportavonden op de veranda</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
     </div>
   </div>
 
@@ -380,15 +388,15 @@
       <article class="pillar kroeg reveal">
         <span class="eyebrow">De kroeg</span>
         <h2>Gewoon gezellig aan de tap.</h2>
-        <p>Bavaria en speciaalbieren op de tap, een ruim assortiment en donderdag dartavond. Zes avonden per week open, op het terras of in 't Bonneke. Zoek je iets, vraag het gerust aan het personeel.</p>
+        <p>Bavaria en speciaalbieren op de tap, een ruim assortiment en donderdag dartavond. Vijf avonden per week open, op het terras of in 't Bonneke. Zoek je iets, vraag het gerust aan het personeel.</p>
         <ul><li>Bavaria en speciaalbieren op de tap</li><li>Dartavond</li><li>Terras</li><li>Bruin café</li></ul>
         <a class="btn btn-ghost" href="#drinken">Bekijk het assortiment</a>
       </article>
       <article class="pillar zaal reveal">
         <span class="eyebrow">Nieuw · De feestzaal</span>
         <h2>Vier je feest bij ons.</h2>
-        <p>De voormalige discotheek is omgebouwd tot feestzaal voor maximaal 150 gasten. Kies uit twee arrangementen.</p>
-        <ul><li>Tot 150 gasten</li><li>2 arrangementen</li><li>Eigen bar</li></ul>
+        <p>De voormalige discotheek is omgebouwd tot feestzaal voor maximaal 120 gasten. Kies uit twee arrangementen.</p>
+        <ul><li>Tot 120 gasten</li><li>2 arrangementen</li><li>Eigen bar</li></ul>
         <a class="btn btn-primary" style="background:var(--cream);color:var(--ink);box-shadow:0 4px 0 #c9b79a" href="#feest">Zaal aanvragen</a>
       </article>
     </div>
@@ -410,12 +418,12 @@
         <div class="t-item reveal">
           <span class="t-when">2012</span>
           <h3>Een nieuwe start</h3>
-          <p>In 2012 ging de zaak verder als Disco-Bar D'n Bonn, met een bruin café en een terras. Sindsdien kun je er zes avonden per week terecht, en iets vragen aan het personeel kan altijd.</p>
+          <p>In 2012 ging de zaak verder als Disco-Bar D'n Bonn, met een bruin café en een terras. Sindsdien kun je er vijf avonden per week terecht, en iets vragen aan het personeel kan altijd.</p>
         </div>
         <div class="t-item reveal">
           <span class="t-when">Nu</span>
           <h3>Kroeg én feestzaal</h3>
-          <p>Nieuw erbij: de voormalige discotheek is omgebouwd tot feestzaal voor 150 gasten. Zo kun je bij ons terecht voor een biertje aan de tap, en nu ook voor je eigen feest.</p>
+          <p>Nieuw erbij: de voormalige discotheek is omgebouwd tot feestzaal voor 120 gasten. Zo kun je bij ons terecht voor een biertje aan de tap, en nu ook voor je eigen feest.</p>
         </div>
       </div>
     </div>
@@ -480,12 +488,21 @@
     </div>
   </section>
 
+  <section id="veranda" style="padding-top:0">
+    <div class="wrap">
+      <div class="veranda-band reveal">
+        <div><span class="eyebrow">Veranda</span><h2>Bekend om de sportavonden.</h2></div>
+        <p>Formule 1, voetbal en meer: op de veranda kijk je samen met een biertje erbij. Ook voor je eigen feest is de veranda te gebruiken.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="zaak" style="padding-top:0">
     <div class="wrap">
       <div class="section-head reveal">
         <span class="eyebrow">De zaak</span>
-        <h2>Drie plekken, één gezelligheid.</h2>
-        <p>Buiten in de zon, binnen aan de tap of in de nieuwe feestzaal. Kies je plek.</p>
+        <h2>Vier plekken, één gezelligheid.</h2>
+        <p>Buiten in de zon, binnen aan de tap, in de nieuwe feestzaal of op de veranda. Kies je plek.</p>
       </div>
       <div class="spaces">
         <article class="space reveal">
@@ -498,7 +515,11 @@
         </article>
         <article class="space reveal">
           <div class="space-img"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De nieuwe feestzaal, voorheen de discotheek" loading="lazy"></div>
-          <div class="space-body"><h3>Feestzaal</h3><p>Onze voormalige discotheek is nu een feestzaal voor maximaal 150 gasten. Dé plek voor jouw verjaardag, jubileum of familiefeest. <a href="#feest" style="color:var(--amber);font-weight:700">Bekijk de mogelijkheden</a></p></div>
+          <div class="space-body"><h3>Feestzaal</h3><p>Onze voormalige discotheek is nu een feestzaal voor maximaal 120 gasten. Dé plek voor jouw verjaardag, jubileum of familiefeest. <a href="#feest" style="color:var(--amber);font-weight:700">Bekijk de mogelijkheden</a></p></div>
+        </article>
+        <article class="space reveal">
+          <div class="space-img veranda-ph"><span>Foto volgt binnenkort</span></div>
+          <div class="space-body"><h3>Veranda</h3><p>Ook op de veranda kun je je feest geven. Bij sportavonden, zoals Formule 1 en voetbal, is het dé plek om samen te kijken.</p></div>
         </article>
       </div>
     </div>
@@ -507,11 +528,11 @@
   <section id="feest" style="padding-top:0">
     <div class="wrap">
       <div class="zaal-pro reveal">
-        <div class="zaal-photo"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal van D'n Bonn" loading="lazy" onerror="this.remove()"><div class="badge"><span>150<small>gasten</small></span></div></div>
+        <div class="zaal-photo"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal van D'n Bonn" loading="lazy" onerror="this.remove()"><div class="badge"><span>120<small>gasten</small></span></div></div>
         <div class="zaal-body">
           <span class="eyebrow">Nieuw bij ons</span>
           <h2>Vier je feest in onze nieuwe zaal.</h2>
-          <p>Verjaardag, jubileum of familiefeest in de omgebouwde discotheek. Maximaal 150 gasten, twee arrangementen. Bel ons of laat hieronder je wensen achter.</p>
+          <p>Verjaardag, jubileum of familiefeest in de omgebouwde discotheek. Maximaal 120 gasten, twee arrangementen. Ook op de veranda kun je je feest geven. Bel ons of laat hieronder je wensen achter.</p>
           <div class="phones">
             <a class="btn btn-primary" href="tel:+31618941094">06 18 94 10 94</a>
             <a class="btn btn-ghost" href="tel:+31638063047">06 38 06 30 47</a>
@@ -519,7 +540,7 @@
           <form data-mailto data-subject="Aanvraag feestzaal D'n Bonn">
             <div class="row-2">
               <div class="field"><label for="z-date">Gewenste datum</label><input id="z-date" name="date" type="date"></div>
-              <div class="field"><label for="z-n">Aantal gasten</label><input id="z-n" name="guests" type="number" min="1" max="150" placeholder="max 150" inputmode="numeric"></div>
+              <div class="field"><label for="z-n">Aantal gasten</label><input id="z-n" name="guests" type="number" min="1" max="120" placeholder="max 120" inputmode="numeric"></div>
             </div>
             <div class="row-2">
               <div class="field"><label for="z-arr">Arrangement</label><select id="z-arr" name="arrangement"><option value="">Weet ik nog niet</option><option>Arrangement 1</option><option>Arrangement 2</option></select></div>
@@ -538,7 +559,7 @@
       <div class="chalkboard reveal">
         <h2>Deze week bij D'n Bonn</h2>
         <div class="week" id="week"></div>
-        <p class="board-note">Maandag is onze rustdag. Dan staat de tap even stil.</p>
+        <p class="board-note">Maandag en dinsdag zijn onze rustdagen. Dan staat de tap even stil.</p>
       </div>
     </div>
   </section>
@@ -579,7 +600,7 @@
             </li>
             <li>
               <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
-              <div><small>Telefoon</small><a href="tel:+31497641414">0497 64 14 14</a></div>
+              <div><small>Telefoon</small><a href="tel:+31638063047">06 38 06 30 47</a></div>
             </li>
             <li>
               <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span>

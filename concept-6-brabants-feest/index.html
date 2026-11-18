@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Disco-Bar D'n Bonn · Reusel</title>
-<meta name="description" content="Gezelligheid in de Kempen: Bavaria en speciaalbieren van de tap, dartavond en een nieuwe feestzaal voor 150 gasten in Reusel.">
+<meta name="description" content="Gezelligheid in de Kempen: Bavaria en speciaalbieren van de tap, dartavond en een nieuwe feestzaal voor 120 gasten in Reusel.">
 <meta name="theme-color" content="#d8232a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -163,6 +163,12 @@
   input[type="date"] { -webkit-appearance: none; appearance: none; display: block; min-width: 0; max-width: 100%; min-height: 50px; text-align: left; }
   input[type="date"]::-webkit-date-and-time-value { text-align: left; }
   .day { min-width: 0; }
+
+  /* Veranda: foto volgt */
+  .veranda-ph { display: grid !important; place-items: center; text-align: center; color: rgba(255,255,255,.8); background: repeating-linear-gradient(45deg, rgba(255,255,255,.07) 0 14px, transparent 14px 28px), var(--img-bg, #3a2a5a) !important; }
+  .veranda-ph span { font: 700 14px/1.3 system-ui, sans-serif; letter-spacing: .1em; text-transform: uppercase; padding: 0 16px; }
+  @media (min-width: 861px) { .spaces { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (min-width: 1021px) { .darts { grid-template-columns: repeat(3, minmax(0,1fr)); } }
 </style>
 </head>
 <body>
@@ -192,7 +198,7 @@
       <div>
         <div class="status" data-status><span class="status-dot"></span><span data-status-text>Openingstijden laden…</span></div>
         <h1>Gezellig&shy;heid in <mark>de Kempen</mark></h1>
-        <p class="lead">Bavaria en speciaalbieren van de tap, dartavond op donderdag en een gloednieuwe feestzaal voor 150 gasten. Bij D'n Bonn in Reusel is iedereen welkom.</p>
+        <p class="lead">Bavaria en speciaalbieren van de tap, dartavond op donderdag en een gloednieuwe feestzaal voor 120 gasten. Bij D'n Bonn in Reusel is iedereen welkom.</p>
         <div class="hero-actions"><a class="btn btn-yellow" href="#feest">Feest vieren?</a><a class="btn btn-white" href="#tijden">Wanneer open?</a></div>
       </div>
       <div class="hero-photo"><img src="https://www.dn-bonn.nl/images/discotheek-dnbonn-reusel.jpg" alt="De bar van D'n Bonn" onerror="this.remove()"></div>
@@ -200,17 +206,17 @@
   </section>
   <div class="check" aria-hidden="true"></div>
   <div class="welkom" aria-hidden="true"><div class="welkom-track">
-    <span>Bavaria en speciaalbieren van de tap</span><span>Dartavond donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
-    <span>Bavaria en speciaalbieren van de tap</span><span>Dartavond donderdag</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
+    <span>Bavaria en speciaalbieren van de tap</span><span>Dartavond donderdag</span><span>Sportavonden op de veranda</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
+    <span>Bavaria en speciaalbieren van de tap</span><span>Dartavond donderdag</span><span>Sportavonden op de veranda</span><span>Gratis broodje op zondag</span><span>Nieuwe feestzaal</span><span>Terras</span><span>Brabantse gezelligheid</span>
   </div></div>
 
   <section id="zaak">
     <div class="wrap">
-      <div class="section-head reveal"><span class="eyebrow">De zaak</span><h2>Kom binnen, <em>pak een stoel.</em></h2><p>Buiten in de zon, binnen aan de tap of in de nieuwe feestzaal.</p></div>
+      <div class="section-head reveal"><span class="eyebrow">De zaak</span><h2>Kom binnen, <em>pak een stoel.</em></h2><p>Buiten in de zon, binnen aan de tap, in de nieuwe feestzaal of op de veranda.</p></div>
       <div class="spaces">
         <article class="space reveal"><div class="space-img"><img src="https://www.dn-bonn.nl/images/terras2.jpg" alt="Het terras" loading="lazy"></div><div class="space-body"><span class="tag">Buiten</span><h3>Terras</h3><p>Heerlijk uitrusten na een fietstocht door de Kempen, of gezellig afspreken met vrienden. Geniet van de Brabantse gezelligheid met een drankje en een hapje.</p></div></article>
         <article class="space reveal"><div class="space-img"><img src="https://www.dn-bonn.nl/images/bonneke.jpg" alt="Het bruine café 't Bonneke" loading="lazy"></div><div class="space-body"><span class="tag">Bruin café</span><h3>'t Bonneke</h3><p>Hier schuif je aan voor een goed gesprek en een biertje. Aan de tap staan meerdere bieren, en mis je iets, vraag het gerust aan het personeel. De muziek staat lekker op de achtergrond.</p></div></article>
-        <article class="space hl reveal"><div class="space-img"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal, voorheen de discotheek" loading="lazy"></div><div class="space-body"><span class="tag">Nieuw</span><h3>Feestzaal</h3><p>Onze voormalige discotheek is omgebouwd tot feestzaal voor maximaal 150 gasten. Dé plek voor jouw verjaardag, jubileum of bedrijfsfeest.</p></div></article>
+        <article class="space hl reveal"><div class="space-img"><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal, voorheen de discotheek" loading="lazy"></div><div class="space-body"><span class="tag">Nieuw</span><h3>Feestzaal</h3><p>Onze voormalige discotheek is omgebouwd tot feestzaal voor maximaal 120 gasten. Dé plek voor jouw verjaardag, jubileum of bedrijfsfeest.</p></div></article><article class="space reveal"><div class="space-img veranda-ph"><span>Foto volgt binnenkort</span></div><div class="space-body"><span class="tag">Feest &amp; sport</span><h3>Veranda</h3><p>Ook op de veranda kun je je feest geven. Bij sportavonden, zoals Formule 1 en voetbal, is het dé plek om samen te kijken.</p></div></article>
       </div>
     </div>
   </section>
@@ -224,7 +230,7 @@
         <p>De ruimte van onze voormalige discotheek is nu dé plek voor verjaardag, jubileum of bedrijfsfeest. Kies uit twee arrangementen of bel ons voor een voorstel op maat.</p>
         <div class="phones"><a class="btn btn-yellow" href="tel:+31618941094">06 18 94 10 94</a><a class="btn btn-white" href="tel:+31638063047">06 38 06 30 47</a><a class="btn btn-white" href="mailto:info@dn-bonn.nl?subject=Feestzaal%20bij%20D'n%20Bonn">Mail ons</a></div>
       </div>
-      <div class="zaal-photo reveal"><span class="badge150"><span><b>150</b>gasten</span></span><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal van D'n Bonn" loading="lazy" onerror="this.remove()"></div>
+      <div class="zaal-photo reveal"><span class="badge150"><span><b>120</b>gasten</span></span><img src="https://www.dn-bonn.nl/images/bar.jpg" alt="De feestzaal van D'n Bonn" loading="lazy" onerror="this.remove()"></div>
     </div>
   </section>
 
@@ -234,13 +240,14 @@
       <div class="darts">
         <div class="dart-card reveal"><span class="dd">Woensdag</span><h3>Gratis darten</h3><p>Gooi gerust een rondje mee, zonder kosten.</p></div>
         <div class="dart-card red reveal"><span class="dd">Donderdag</span><h3>Dartavond</h3><p>Competitie darten met bier van de tap. Kom meedoen of gewoon kijken.</p></div>
+        <div class="dart-card reveal" style="background:var(--blue);color:#fff;border-color:var(--blue)"><span class="dd">Veranda</span><h3>Sportavonden</h3><p>Bekend om Formule 1, voetbal en meer. Kijk gezellig mee, of geef er je feest.</p></div>
       </div>
     </div>
   </section>
 
   <section id="tijden" class="week-sec">
     <div class="wrap">
-      <div class="section-head reveal"><span class="eyebrow">Openingstijden</span><h2>Zes avonden <em>open.</em></h2><p>Maandag zijn we dicht.</p></div>
+      <div class="section-head reveal"><span class="eyebrow">Openingstijden</span><h2>Vijf avonden <em>open.</em></h2><p>Maandag en dinsdag zijn we dicht.</p></div>
       <div class="week reveal" id="week"></div>
     </div>
   </section>
@@ -265,7 +272,7 @@
         <div class="contact-card card reveal">
           <ul class="contact-list">
             <li><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>Adres</small><a href="https://maps.google.com/?q=Wilhelminalaan+53,+5541CT+Reusel" target="_blank" rel="noopener">Wilhelminalaan 53<br>5541 CT Reusel</a></div></li>
-            <li><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><div><small>Telefoon</small><a href="tel:+31497641414">0497 64 14 14</a></div></li>
+            <li><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span><div><small>Telefoon</small><a href="tel:+31638063047">06 38 06 30 47</a></div></li>
             <li><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg></span><div><small>E-mail</small><a href="mailto:info@dn-bonn.nl">info@dn-bonn.nl</a></div></li>
           </ul>
           <form data-mailto data-subject="Bericht via de website">
